@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+    <form action='{{url_for('mgr_index')}}' method='get'>
+	<input type='submit' value='Back' />
+    </form><br/>
+    
+    <form action="{{url_for('man_grow')}}" onsubmit='return confirm("Are you sure to GROW the worker pool?")'>
+	<input type="submit" value="Grow the Pool">
+    </form>
+    
+    <form action="{{url_for('man_shrink')}}" onsubmit='return confirm("Are you sure to SHRINK the worker pool?")'>
+	<input type="submit" value="Shrink the Pool">
+    </form>
+
+    <table />
+    <thead>
+       <th>ID</th>
+       <th>Type</th>
+       <th>Availability Zone</th>
+       <th>Status</th>
+    </thead> 
+    {% for instance in instances %}
+	<tr>
+	    <td>{{ instance.id }}</td>
+	    <td>{{ instance.instance_type }}</td>
+	    <td>{{ instance.placement['AvailabilityZone']}}</td>
+	    <td>{{ instance.state['Name'] }}</td>
+	    <td>
+		<form action="{{url_for('worker_view',id=instance.id)}}" method='get'>
+		    <input type='submit' value='Details' />
+		</form>
+	    </td>
+    	    <td>
+		<form action="{{url_for('destory', id=instance.id)}}" method='get'>
+		    <input type='submit' value='Destroy' />
+		</form>
+	    </td>
+	</tr>
+    {% endfor %}
+    </table>
+{% endblock %}

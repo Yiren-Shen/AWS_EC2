@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form action='{{url_for("home")}}' method='get'>
+	<input type='submit' value='Back' />
+    </form>
+    <li><a href="{{ url_for('worker_pool') }}"> Worker Pool </a></li>
+    <li><a href="{{ url_for('thre_conf') }}"> Auto-scaling Policy </a></li>
+    <li><a href="{{ url_for('delete') }}"> Data Clearing </li>
+
+{% endblock %}

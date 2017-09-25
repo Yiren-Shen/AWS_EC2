@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<a href="{{ url_for('worker_pool') }}"> Back to worker pool </a>
+{% if action == 'grow' %}
+    <p> Following worker(s) are added: </p>
+{% endif %}
+
+{% if action == 'shrink' %}
+    <p> Following worker(s) are removed: </p>
+{% endif %}
+
+
+    <table />
+    <thead>
+       <th>ID</th>
+       <th>Type</th>
+       <th>Availability Zone</th>
+    </thead> 
+    {% for instance in instances %}
+        <tr>
+            <td>{{ instance.id }}</td>
+            <td>{{ instance.instance_type }}</td>
+            <td>{{ instance.placement['AvailabilityZone']}}</td>
+        </tr>
+    {% endfor %}
+    </table>
+
+{% endblock %}

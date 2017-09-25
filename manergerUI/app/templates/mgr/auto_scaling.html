@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block content %}
+<a href="{{ url_for('mgr_index') }}"> Back to Index </a>
+<p>
+Current Worker Pool State
+<br/>
+Worker Number: {{ num }}
+<br />
+CPU Utilization: {{ cpu }}
+</p>
+<br/>
+Configuration
+<form action="{{url_for('auto_scale')}}" method='post'>
+    <table>
+	<tr>
+	    <td>Growing Threshold:</td>
+	    <td><select name="grow_thre" id="grow_thre"></select></td>
+	    <td>Growing Ratio</td>
+	    <td><select name="grow_ratio" id="grow_ratio"></select></td>
+	</tr>
+	<tr>
+	    <td>Shrinking Threshold:</td>
+	    <td><select name="shrink_thre" id="shrink_thre"></select></td>
+	    <td>Shrinking Ratio</td>
+	    <td><select name="shrink_ratio" id="shrink_ratio"></select></td>
+	</tr>
+    </table>
+    <input type="submit" value="Scaling">
+</form>
+
+<script>
+    var selectGrow = document.getElementById('grow_thre');
+    for (var i = 0; i < 11; i++) {
+	selectGrow[i] = new Option( i*10 + '%', i*10 );
+    }
+    selectGrow[10].selected = true;
+    
+    var selectGrowRatio = document.getElementById('grow_ratio');
+    for (var i = 0; i < 4; i++) {
+	selectGrowRatio[i] = new Option( i*0.25+1.25, i*0.25+1.25 );
+    }
+    
+    var selectShrink = document.getElementById('shrink_thre');
+    for (var i = 0; i < 11; i++) {
+	selectShrink[i] = new Option( i*10 + '%', i*10 );
+    }
+    
+    var selectShrinkRatio = document.getElementById('shrink_ratio');
+    for (var i = 0; i < 4; i++) {
+	selectShrinkRatio[i] = new Option( i+2, i+2 );
+    }
+
+</script>
+
+{% if conf %}
+
+    {% if action == 'grow' %}
+	<p> Following worker(s) are auto-added: </p>
+    {% endif %}
+    
+    {% if action == 'shrink' %}
+	<p> Following worker(s) are auto-removed: </p>
+    {% endif %}
+    
+    {% if action == 'none' %}
+	<p> No workers are auto-added/removed: </p>
+    {% endif %}
+    
+	<table />
+	<thead>
+	   <th>ID</th>
+	   <th>Type</th>
+	   <th>Availability Zone</th>
+	</thead> 
+	{% for instance in instances %}
+	    <tr>
+		<td>{{ instance.id }}</td>
+		<td>{{ instance.instance_type }}</td>
+		<td>{{ instance.placement['AvailabilityZone']}}</td>
+	    </tr>
+	{% endfor %}
+	</table>
+{% endif %}
+
+{% endblock %}

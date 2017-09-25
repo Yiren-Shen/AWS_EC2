@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<style type="text/css">
+body {background-color: #ebf5ff}
+/*h1 {background-color: #ebebff}*/
+</style>
+<head>
+	<style type="text/css">
+p 
+{
+border:#f8f3ec ridge thick;
+/*outline:#f5ebff dotted thick;*/
+}
+</style>
+	<script type="text/javascript" src="{{ url_for('static', filename='flot/jquery.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='flot/jquery.flot.js') }}"></script>
+	{% if title %}
+		<title>{{ title }}</title>
+	{% else %}
+		<title>Project by 11</title>
+	{% endif %}
+</head>
+<body>
+	{% if title %}
+		<p><h1>{{ title }}</h1></p>
+	{% endif %}
+	{% block content %}
+	{% endblock %}
+</body>
+</html>
