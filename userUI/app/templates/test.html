@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<font color="red">{{error_msg if error_msg != Null}}</font>
+
+<form action="/test/FileUpload", enctype="multipart/form-data", method="post">
+    <table>
+        <tr>
+            <td>User ID</td>
+            <td><input type="text" name="userID"></td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td><input type="password" name="password"></td>
+        </tr>
+    </table>
+    <br/>
+    File to Upload: <input type="file" name="uploadedfile">
+    <br/>
+    <input type="submit" value="send">
+    <input type="reset">
+</form>
+{% endblock %}

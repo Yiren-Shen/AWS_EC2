@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<style type="text/css">
+body {background-color: #ebf5ff}
+/*h1 {background-color: #ebebff}*/
+</style>
+<head>
+	<style type="text/css">
+p 
+{
+border:#f8f3ec ridge thick;
+/*outline:#f5ebff dotted thick;*/
+}
+</style>
+	{% if title %}
+		<title>{{ title }}</title>
+	{% else %}
+		<title>Project by 11</title>
+	{% endif %}
+</head>
+<body>
+	{% if title %}
+		<p><h1>{{ title }}</h1></p>
+	{% endif %}
+	{% block content %}
+	{% endblock %}
+</body>
+</html>

@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
+<form action="{{url_for('login')}}"><input type="submit" value="Logout"></form>
+<li><a href="{{url_for('image_list',user_id=user_id)}}">Image List</a></li>
+{% endblock %}

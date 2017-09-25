@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form action="{{url_for('image_list', user_id=user_id)}}"><input type="submit" value="Back"></form>
+<form action="{{url_for('image_save', user_id=user_id)}}" enctype="multipart/form-data" method="post">
+	<font color="red">{{ error_msg if error_msg }}</font><br/>
+	Image to Upload: <input type="file" name="image" accept="image/gif,image/png,image/jpeg" /><br/>
+	<input type="submit" value="Upload"/>
+	<input type="reset" value="Reset"/>
+</form>
+
+{% endblock %}

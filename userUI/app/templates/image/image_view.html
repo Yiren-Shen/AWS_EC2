@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+<form action="{{ url_for('image_list', user_id=user_id) }}"><input type="submit" value="Back to list"></form>
+<p>{{ 'Upload Completed!' if uploaded }}</p><br/>
+{% for key in keys %}
+    <img src="{{ 'https://s3.amazonaws.com/'+ mybucket+ '/' + key }}" alt="image">
+{% endfor %}
+{% endblock %}

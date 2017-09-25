@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form action="{{url_for('index', user_id=user_id)}}"><input type="submit" value="Back"></form>
+<a href="{{url_for('image_upload', user_id=user_id)}}">Upload a new image</a><br/>
+{% for key in keys %}
+    <a href="{{ url_for('image_view', user_id=user_id, img_id=key[0]) }}">
+        <img src = "{{ 'https://s3.amazonaws.com/'+ mybucket+ '/' + key[1] }}" alt="image"/>
+    </a>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<form action="{{url_for('home')}}"><input type="submit" value="Back"/></form>
+<font color="red">{{error_msg if error_msg != Null}}</font>
+<table>
+<form action="{{url_for('login_verify')}}" method="post">
+    <tr>
+        <td>Account: </td>
+        <td><input type="text" name="user_account" /></td>
+    </tr>
+    <tr>
+        <td>Password: </td>
+        <td><input type="password" name="user_password"/></td>
+    </tr>
+    <tr>
+        <td><input type="submit" value="Sign In"></td>
+        <td><a href="{{url_for('register')}}">Register</a></td>
+    </tr>
+</form>
+</table>
+{% endblock %}
